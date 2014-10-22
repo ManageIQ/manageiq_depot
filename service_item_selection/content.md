@@ -1,4 +1,4 @@
-Service Item Selection (Updated) {.entry-title}
+Service Item Selection (Updated)
 ================================
 
 Posted on [October 11,
@@ -23,7 +23,7 @@ Giving the user the option to select QA, Test or Production.
 The decision would evaluate to one of 3 backing Service Items. Shown
 here in this diagram;
 
-[![Slide1](images/slide1.png?w=600&h=450)]
+[![Slide1](images/slide1.png)]
 
 Each service item here maybe RHEV, OpenStack or VMware. They might be
 all AWS/EC2 but different AMI’s etc!
@@ -90,133 +90,38 @@ then we want to dump this Service Item.
 Here is the method; Its called Stopper, its a state on each of the
 Service Item State Machines, I shall show you this next;
 
-  ------------------------------------ ------------------------------------
-  1                                    `def`{.ruby .keyword}
-  2                                    `mark_task_invalid(task)`{.ruby
-  3                                    .plain}
-  4                                    ` `{.ruby
-  5                                    .spaces}`task.finished(`{.ruby
-  6                                    .plain}`"Invalid"`{.ruby
-  7                                    .string}`)`{.ruby .plain}
-  8                                    ` `{.ruby
-  9                                    .spaces}`task.miq_request_tasks.`{.r
-  10                                   uby
-  11                                   .plain}`each`{.ruby .keyword}
-  12                                   `do`{.ruby .keyword} `|t|`{.ruby
-  13                                   .plain}
-  14                                   ` `{.ruby .spaces}`2`{.ruby
-  15                                   .constants}`.times { `{.ruby
-  16                                   .plain}`$evm`{.ruby .variable
-  17                                   .bold}`.log(`{.ruby
-  18                                   .plain}`"info"`{.ruby
-  19                                   .string}`, `{.ruby
-  20                                   .plain}`"***************************
-  21                                   *****DUMPING TASK #{t}**************
-  22                                   ***********************"`{.ruby
-  23                                   .string}`) }`{.ruby .plain}
-  24                                   ` `{.ruby
-  25                                   .spaces}`mark_task_invalid(t)`{.ruby
-  26                                   .plain}
-  27                                   ` `{.ruby .spaces}`end`{.ruby
-  28                                   .keyword}
-                                       `end`{.ruby .keyword}
-                                        
-                                        
-                                       `10`{.ruby
-                                       .constants}`.times { `{.ruby
-                                       .plain}`$evm`{.ruby .variable
-                                       .bold}`.log(`{.ruby
-                                       .plain}`"info"`{.ruby
-                                       .string}`, `{.ruby
-                                       .plain}`"***************************
-                                       ************************************
-                                       ******"`{.ruby
-                                       .string}`) }`{.ruby .plain}
-                                        
-                                       `stp_task = `{.ruby
-                                       .plain}`$evm`{.ruby .variable
-                                       .bold}`.root[`{.ruby
-                                       .plain}`"service_template_provision_
-                                       task"`{.ruby
-                                       .string}`]`{.ruby .plain}
-                                       `miq_request_id = `{.ruby
-                                       .plain}`$evm`{.ruby .variable
-                                       .bold}`.vmdb(`{.ruby
-                                       .plain}`'miq_request_task'`{.ruby
-                                       .string}`, stp_task.get_option(`{.ru
-                                       by
-                                       .plain}`:parent_task_id`{.ruby
-                                       .color2}`))`{.ruby .plain}
-                                       `dialogOptions = miq_request_id.get_
-                                       option(`{.ruby
-                                       .plain}`:dialog`{.ruby
-                                       .color2}`)`{.ruby .plain}
-                                        
-                                       `$evm`{.ruby .variable
-                                       .bold}`.log(`{.ruby
-                                       .plain}`"info"`{.ruby
-                                       .string}`, `{.ruby
-                                       .plain}`"Dialog_Environment #{dialog
-                                       Options['dialog_environment'].downca
-                                       se}"`{.ruby
-                                       .string}`)`{.ruby .plain}
-                                       `$evm`{.ruby .variable
-                                       .bold}`.log(`{.ruby
-                                       .plain}`"info"`{.ruby
-                                       .string}`, `{.ruby
-                                       .plain}`"State_Environment #{$evm.ro
-                                       ot['State_Environment'].downcase}"`{
-                                       .ruby
-                                       .string}`)`{.ruby .plain}
-                                        
-                                       `if`{.ruby .keyword}
-                                       `dialogOptions[`{.ruby
-                                       .plain}`'dialog_environment'`{.ruby
-                                       .string}`].downcase != `{.ruby
-                                       .plain}`$evm`{.ruby .variable
-                                       .bold}`.root[`{.ruby
-                                       .plain}`'State_Environment'`{.ruby
-                                       .string}`].downcase`{.ruby .plain}
-                                       ` `{.ruby .spaces}`$evm`{.ruby
-                                       .variable .bold}`.log(`{.ruby
-                                       .plain}`"info"`{.ruby
-                                       .string}`, `{.ruby
-                                       .plain}`"NO MATCH - DUMPING Service 
-                                       from resolution"`{.ruby
-                                       .string}`)`{.ruby .plain}
-                                       ` `{.ruby .spaces}`task = `{.ruby
-                                       .plain}`$evm`{.ruby .variable
-                                       .bold}`.root[`{.ruby
-                                       .plain}`"service_template_provision_
-                                       task"`{.ruby
-                                       .string}`]`{.ruby .plain}
-                                       ` `{.ruby
-                                       .spaces}`mark_task_invalid(task)`{.r
-                                       uby
-                                       .plain}
-                                       ` `{.ruby .spaces}`exit `{.ruby
-                                       .plain}`MIQ_STOP`{.ruby .constants}
-                                       `end`{.ruby .keyword}
-                                        
-                                       `$evm`{.ruby .variable
-                                       .bold}`.log(`{.ruby
-                                       .plain}`"info"`{.ruby
-                                       .string}`, `{.ruby
-                                       .plain}`"MATCH FOUND - Processing Se
-                                       rvice Normally"`{.ruby
-                                       .string}`)`{.ruby .plain}
-                                        
-                                       `10`{.ruby
-                                       .constants}`.times { `{.ruby
-                                       .plain}`$evm`{.ruby .variable
-                                       .bold}`.log(`{.ruby
-                                       .plain}`"info"`{.ruby
-                                       .string}`, `{.ruby
-                                       .plain}`"***************************
-                                       ************************************
-                                       ******"`{.ruby
-                                       .string}`) }`{.ruby .plain}
-  ------------------------------------ ------------------------------------
+-----------------------------------------------------------------------
+
+"Stopper" scripts:
+
+    def mark_task_invalid(task)
+     task.finished("Invalid")
+     task.miq_request_tasks.each do |t|
+     2.times { $evm.log("info", "********************************DUMPING TASK #{t}*************************************") }
+     mark_task_invalid(t)
+     end
+    end
+
+    10.times { $evm.log("info", "*********************************************************************") }
+
+    stp_task = $evm.root["service_template_provision_task"]
+    miq_request_id = $evm.vmdb('miq_request_task', stp_task.get_option(:parent_task_id))
+    dialogOptions = miq_request_id.get_option(:dialog)
+
+    $evm.log("info", "Dialog_Environment #{dialogOptions['dialog_environment'].downcase}")
+    $evm.log("info", "State_Environment #{$evm.root['State_Environment'].downcase}")
+
+    if dialogOptions['dialog_environment'].downcase != $evm.root['State_Environment'].downcase
+      $evm.log("info", "NO MATCH - DUMPING Service from resolution")
+      task = $evm.root["service_template_provision_task"]
+      mark_task_invalid(task)
+      exit MIQ_STOP
+    end
+
+    $evm.log("info", "MATCH FOUND - Processing Service Normally")
+
+    10.times { $evm.log("info", "*********************************************************************") }
+-----------------------------------------------------------------------
 
 Download the [Stopper method here](scripts/Stopper.rb)
 
@@ -258,38 +163,18 @@ domain, I would simply copy the one from;
 And either copy this code in, just place it near the top, before the
 processing of the objects;
 
-  ------------------------------------ ------------------------------------
-  1                                    `# Bypass errors for Invalid instanc
-  2                                    es`{.ruby
-  3                                    .comments}
-  4                                    `if`{.ruby .keyword}
-  5                                    `prov.message == `{.ruby
-  6                                    .plain}`'Invalid'`{.ruby .string}
-  7                                    `  `{.ruby .spaces}`$evm`{.ruby
-  8                                    .variable .bold}`.log(`{.ruby
-                                       .plain}`"info"`{.ruby
-                                       .string}`,`{.ruby
-                                       .plain}`"Skipping Invalid Services"`
-                                       {.ruby
-                                       .string}`)`{.ruby .plain}
-                                       `  `{.ruby .spaces}`$evm`{.ruby
-                                       .variable .bold}`.root[`{.ruby
-                                       .plain}`'ae_result'`{.ruby
-                                       .string}`] = `{.ruby
-                                       .plain}`'ok'`{.ruby .string}
-                                       `  `{.ruby
-                                       .spaces}`message = `{.ruby
-                                       .plain}`'Service Provisioned Success
-                                       fully'`{.ruby
-                                       .string}
-                                       `  `{.ruby
-                                       .spaces}`prov.finished(prov.message)
-                                       `{.ruby
-                                       .plain}
-                                       `  `{.ruby .spaces}`exit `{.ruby
-                                       .plain}`MIQ_OK`{.ruby .constants}
-                                       `end`{.ruby .keyword}
-  ------------------------------------ ------------------------------------
+-----------------------------------------------------------------------
+
+    # Bypass errors for Invalid instances
+    if prov.message == 'Invalid'
+      $evm.log("info","Skipping Invalid Services")
+      $evm.root['ae_result'] = 'ok'
+      message = 'Service Provisioned Successfully'
+      prov.finished(prov.message)
+      exit MIQ_OK
+    end
+
+-----------------------------------------------------------------------
 
 or [download this new one from here](scripts/update_serviceprovision_status.rb)
 
@@ -305,4 +190,3 @@ in your tool box.
 I will raise a discussion on talk.manageiq.org to share this, and get
 input on having the GUI conditional processor available in the Service
 Item designer phase.
-
