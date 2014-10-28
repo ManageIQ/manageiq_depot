@@ -11,3 +11,5 @@ as demonstrated in this example.
 version: 0.1
 miq_ver: anand
 dependencies: ruby 1.9.x, ruby 2.x
+src_url: https://github.com/ManageIQ/manageiq_depot/tree/master/service_item_selection 
+
