@@ -168,25 +168,15 @@ code into the method.
 To run it, just call this instance from anywhere in the automation
 engine, for example from a stage in the provisioning state machine...
 
-<div class="lightbox-wrapper">
 
 ![](images/ow_screenshot_2.jpg)
-<div class="meta">
 
-</div>
-
-</div>
 
 or from a button...
 
-<div class="lightbox-wrapper">
 
 ![](images/ow_screenshot_3.jpg)
-<div class="meta">
 
-</div>
-
-</div>
 
 or even using *\$evm.instantiate(/Bit63/Bit63/Methods/objectWalker)*
 from within your own method.
