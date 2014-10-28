@@ -1,0 +1,13 @@
+author: jhardy
+collaborator: bascar,mfeifer
+date: 2014-10-20
+name: Service Item Selection
+url: service_item_selection
+tags: automate, policy, scripts
+description: 
+How can I make a service with multiple service items, but then
+conditional drop some during the deployment? You create a 'Service Dialog' 
+as demonstrated in this example.
+version: 0.1
+miq_ver: anand
+dependencies: ruby 1.9.x, ruby 2.x
