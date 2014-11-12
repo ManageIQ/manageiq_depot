@@ -7,7 +7,7 @@ This is the format of individual extensions in the repo:
 
 - /images directory - where you place screenshots
 - /scripts directory - where you place, you guessed it, code
-- index.md - descriptive text and instructions for whoever will want to use it
+- content.md - descriptive text and instructions for whoever will want to use it
 - metadata.yaml - this contains the following definitions:
     - author: username
     - collaborator: comma,delimited,text
