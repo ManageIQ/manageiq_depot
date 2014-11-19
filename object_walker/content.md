@@ -1,6 +1,3 @@
-objectWalker
-============
-
 One of the challenges when starting out writing CloudForms or ManageIQ automation scripts, is knowing where the objects and attributes are under $evm.root that we may need to access. For example, depending on the automation action, we may have an $evm.root['vm'] object, or we may not.
 
 This script is an attempt to demystify the object structure that is available at any point in the Automation engine.
@@ -10,30 +7,30 @@ as it goes, i.e.
 
 
 ```
-objectWalker 1.0 - EVM Automate Method Started  
-      objectWalker:   Dumping $evm.root  
-      objectWalker:   $evm.root.ae_result = ok   (type: String)  
-      objectWalker:   $evm.root.ae_state = RegisterDHCP   (type: String)  
-      objectWalker:   $evm.root.ae_state_retries = 0   (type: Fixnum)  
-      objectWalker:   $evm.root.ae_state_started = 2014-09-18 12:00:57 UTC   (type: String)  
+objectWalker 1.0 - EVM Automate Method Started
+      objectWalker:   Dumping $evm.root
+      objectWalker:   $evm.root.ae_result = ok   (type: String)
+      objectWalker:   $evm.root.ae_state = RegisterDHCP   (type: String)
+      objectWalker:   $evm.root.ae_state_retries = 0   (type: Fixnum)
+      objectWalker:   $evm.root.ae_state_started = 2014-09-18 12:00:57 UTC   (type: String)
       objectWalker:   $evm.root['miq_provision'] => #<MiqAeMethodService::MiqAeServiceMiqProvisionRedhatViaPxe:0x0000000f6b5d78>
       |    objectWalker:   $evm.root['miq_provision'].created_on = 2014-09-18 11:33:22 UTC   (type: ActiveSupport::TimeWithZone)
-      |    objectWalker:   $evm.root['miq_provision'].description = Provision from [Generic] to [cfme027]   (type: String)  
-      |    objectWalker:   $evm.root['miq_provision'].destination_id = 1000000000058   (type: Fixnum)  
-      |    objectWalker:   $evm.root['miq_provision'].destination_type = VmOrTemplate   (type: String)  
-      |    objectWalker:   $evm.root['miq_provision'].id = 1000000000102   (type: Fixnum)  
+      |    objectWalker:   $evm.root['miq_provision'].description = Provision from [Generic] to [cfme027]   (type: String)
+      |    objectWalker:   $evm.root['miq_provision'].destination_id = 1000000000058   (type: Fixnum)
+      |    objectWalker:   $evm.root['miq_provision'].destination_type = VmOrTemplate   (type: String)
+      |    objectWalker:   $evm.root['miq_provision'].id = 1000000000102   (type: Fixnum)
       |    objectWalker:   $evm.root['miq_provision'].message = Registering DHCP   (type: String)
-      ...  
-      |    objectWalker:   --- virtual columns follow ---  
-      |    objectWalker:   $evm.root['miq_provision'].provision_type = template   (type: String)  
-      |    objectWalker:   $evm.root['miq_provision'].region_description = Region 1   (type: String)  
-      ...  
-      |    objectWalker:   --- end of virtual columns ---  
-      |    objectWalker:   $evm.root['miq_provision'].destination (type: Association, objects found)  
-      |    objectWalker:   destination = $evm.root['miq_provision'].destination  
-      |    |    objectWalker:   (object type: MiqAeServiceVmRedhat, object ID: 1000000000058)  
-      |    |    objectWalker:   destination.connection_state = connected   (type: String)  
-      |    |    objectWalker:   destination.created_on = 2014-09-18 11:35:17 UTC   (type: ActiveSupport::TimeWithZone)  
+      ...
+      |    objectWalker:   --- virtual columns follow ---
+      |    objectWalker:   $evm.root['miq_provision'].provision_type = template   (type: String)
+      |    objectWalker:   $evm.root['miq_provision'].region_description = Region 1   (type: String)
+      ...
+      |    objectWalker:   --- end of virtual columns ---
+      |    objectWalker:   $evm.root['miq_provision'].destination (type: Association, objects found)
+      |    objectWalker:   destination = $evm.root['miq_provision'].destination
+      |    |    objectWalker:   (object type: MiqAeServiceVmRedhat, object ID: 1000000000058)
+      |    |    objectWalker:   destination.connection_state = connected   (type: String)
+      |    |    objectWalker:   destination.created_on = 2014-09-18 11:35:17 UTC   (type: ActiveSupport::TimeWithZone)
 ```
   etc
 
@@ -45,8 +42,10 @@ if @walk_association_policy = :whitelist, then objectWalker will only traverse a
 mentioned in the @walk_association_whitelist hash. This enables us to carefully control what is dumped. If objectWalker finds
 an association that isn't in the hash, it will print a line similar to:
 
+```ruby
 $evm.root['vm'].datacenter (type: Association, objects found)
    (datacenter isn't in the @walk_associations hash for MiqAeServiceVmRedhat...)
+```
 
 If you wish to explore and dump this associaiton, edit the hash to add the association name to the list associated with the
 object type. The symbol :ALL can be used to walk all associations of an object type
@@ -85,20 +84,20 @@ objectWalker:   Object MiqAeServiceServiceTemplate with ID 1000000000003 has alr
 Many attributes that get dumped have a value of 'nil', i.e.
 
 ```
-objectWalker:   $evm.root['user'] => #<MiqAeMethodService::MiqAeServiceUser:0x000000056e9bf0>   (type: DRb::DRbObject)  
-      |    objectWalker:   $evm.root['user'].created_on = 2014-09-16 07:52:05 UTC   (type: ActiveSupport::TimeWithZone)  
-      |    objectWalker:   $evm.root['user'].current_group_id = 1000000000001   (type: Fixnum)  
-      |    objectWalker:   $evm.root['user'].email = nil  
-...  
-      |    objectWalker:   --- virtual columns follow ---  
-      |    objectWalker:   $evm.root['user'].allocated_memory = 0   (type: Fixnum)  
-      |    objectWalker:   $evm.root['user'].allocated_storage = 0   (type: Fixnum)  
-      |    objectWalker:   $evm.root['user'].allocated_vcpu = 0   (type: Fixnum)  
-      |    objectWalker:   $evm.root['user'].custom_1 = nil  
-      |    objectWalker:   $evm.root['user'].custom_2 = nil  
-      |    objectWalker:   $evm.root['user'].custom_3 = nil  
-      |    objectWalker:   $evm.root['user'].custom_4 = nil  
-      |    objectWalker:   $evm.root['user'].custom_5 = nil  
+objectWalker:   $evm.root['user'] => #<MiqAeMethodService::MiqAeServiceUser:0x000000056e9bf0>   (type: DRb::DRbObject)
+      |    objectWalker:   $evm.root['user'].created_on = 2014-09-16 07:52:05 UTC   (type: ActiveSupport::TimeWithZone)
+      |    objectWalker:   $evm.root['user'].current_group_id = 1000000000001   (type: Fixnum)
+      |    objectWalker:   $evm.root['user'].email = nil
+...
+      |    objectWalker:   --- virtual columns follow ---
+      |    objectWalker:   $evm.root['user'].allocated_memory = 0   (type: Fixnum)
+      |    objectWalker:   $evm.root['user'].allocated_storage = 0   (type: Fixnum)
+      |    objectWalker:   $evm.root['user'].allocated_vcpu = 0   (type: Fixnum)
+      |    objectWalker:   $evm.root['user'].custom_1 = nil
+      |    objectWalker:   $evm.root['user'].custom_2 = nil
+      |    objectWalker:   $evm.root['user'].custom_3 = nil
+      |    objectWalker:   $evm.root['user'].custom_4 = nil
+      |    objectWalker:   $evm.root['user'].custom_5 = nil
 ```
 
 Sometimes we want to know that the attribute is present, even if its value is nil, but at other times we only wish to know
@@ -164,6 +163,7 @@ have a simple *execute* stage to run the method. Paste the objectWalker
 code into the method.
 
 ![](images/8a3d6b585f96764c.jpg)
+{:align="center"}
 
 To run it, just call this instance from anywhere in the automation
 engine, for example from a stage in the provisioning state machine...
@@ -178,7 +178,7 @@ or from a button...
 ![](images/ow_screenshot_3.jpg)
 
 
-or even using *\$evm.instantiate(/Bit63/Bit63/Methods/objectWalker)*
+or even using `$evm.instantiate(/Bit63/Bit63/Methods/objectWalker)`
 from within your own method.
 
 objectWalker writes its output to automation.log, so you can either just
