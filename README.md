@@ -1,7 +1,7 @@
-ManageIQ Extensions Depot
+ManageIQ Community Depot
 =========================
 
-Let's get ready for the ManageIQ Extensions Depot. Got a policy you want to share? State machine? A script that utilizes the REST API and object model? Put it in the extensions depot! The extensions depot is where the ManageIQ community shares and collaborates on ManageIQ extensions. 
+Let's get ready for the ManageIQ Community Depot. Got a policy you want to share? State machine? A script that utilizes the REST API and object model? Put it in the community depot! The community depot (or just "the depot") is where the ManageIQ community shares and collaborates on ManageIQ software projects and extensions. 
 
 This is the format of individual extensions in the repo:
 
@@ -27,7 +27,7 @@ How to Add Your Extension
 =========================
 
 - fork "manageiq_depot"
-- add your extension to your local fork
+- add your extension to your local fork, following format guidance above
 - make pull request
 - we will evaluate the pull request and either accept or request more information
 - you are responsible for issuing pull requests for future changes and versions
