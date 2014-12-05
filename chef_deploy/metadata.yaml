@@ -3,7 +3,7 @@ collaborator: mandeep170, cheeseplus
 date: 2014-12-05
 name: Chef Deploy
 slug: chef_deploy
-tags: chef, quickstart, build from source
+tags: build, dev 
 description: |
     Use Chef to quickly build and deploy ManageIQ from source. 
 version: 0.1.0
