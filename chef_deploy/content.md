@@ -2,10 +2,13 @@ One of the largest challenges facing new users of ManageIQ is how to get started
 
 Requirements
 ------------
+
 ### Platforms
+
 Tested on RHEL 6.5 and CentOS 6.5. Should work on any Red Hat family distributions.
 
 ### Cookbooks
+
 - git
 - yum
 - yum-epel
@@ -18,15 +21,19 @@ Tested on RHEL 6.5 and CentOS 6.5. Should work on any Red Hat family distributio
 
 Attributes
 ----------
-######Attributes specifically for ManageIQ
+
+###### Attributes specifically for ManageIQ
+
 - `default["manageiq"]["db_username"]` - Username for the ManageIQ database user (default: "evm")
 - `default['manageiq']['db_password']` - password for the ManageIQ database user
 - `default['manageiq']['code_repo']` - GIT Repo URL used to build the server
 
-######Attributes for the RVM cookbook
+###### Attributes for the RVM cookbook
+
 - `default['rvm']['user_installs']` - Username for the user who is building and running the ManageIQ processes
 
-######Attributes for the PostgreSQL Database
+###### Attributes for the PostgreSQL Database
+
 - `default['postgresql']['password']['postgres']` - Set the root password for the database (default: sets to the manageiq/db_password)
 - `default["postgresql"]["pg_hba"]` - Configures the pg_hba file to allow incoming connections
 - `default["postgresql"]["config"]["port"]` - Database Port (default: 5432)
