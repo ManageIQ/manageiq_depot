@@ -1,0 +1,12 @@
+author: chriskacerguis 
+collaborator: mandeep170, cheeseplus
+date: 2014-12-05
+name: Chef Deploy
+slug: chef_deploy
+tags: chef, quickstart, build from source
+description: |
+    Use Chef to quickly build and deploy ManageIQ from source. 
+version: 0.1.0
+miq_ver: anand
+dependencies: ruby 1.9.x, ruby 2.x, chef, git, yum, yum-epel, iptables, postgresql, ntp, memcached
+src_url: https://github.com/booz-allen-hamilton/chef-manageiq 
