@@ -3,7 +3,7 @@ collaborator: bascar,jhardy
 date: 2014-10-07
 name: Object Walker
 slug: object_walker
-tags: automate, object_model, data_model
+tags: automate, data_model
 description: |
   Demystify available object structures in the Automation engine.
   This script walks the object hierarchy from `$evm.root` downwards,
