@@ -193,15 +193,20 @@ This section details "quick deployment" steps.
           $ cd /tmp/chef
           $ chef-solo -c solo.rb -j manageiq.json
 
+
 License & Authors
 -----------------
+
 - Author:: Chris Kacerguis
 - Author:: Mandeep Bal
 
+
 ```text
+
 Copyright:: 2014, Booz Allen Hamilton
 
 For more information on the license, please refer to the LICENSE.txt file in the repo
+
 ```
 
 

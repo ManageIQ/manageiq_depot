@@ -3,7 +3,7 @@ collaborator: bascar,mfeifer
 date: 2014-10-20
 name: Service Item Selection
 slug: service_item_selection
-tags: automate, policy, scripts
+tags: automate, policy
 description: |
   Create a "service dialog" to conditionally drop service items
   during deployment.
