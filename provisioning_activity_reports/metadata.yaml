@@ -1,0 +1,12 @@
+author: jcornell
+collaborator: 
+date: 2014-12-10
+name: Provisioning Activity Reports
+slug: Provisioning Activity Reports
+tags: automate, reports
+description: |
+5 reports which provide provisioning activity for the current Month, Quarter, YTD and previous Month and Quarter
+version: 0.1
+miq_ver: anand and cloudforms 3.0
+dependencies: none
+src_url: https://github.com/ManageIQ/manageiq_depot/tree/master/provisioning_activity_reports

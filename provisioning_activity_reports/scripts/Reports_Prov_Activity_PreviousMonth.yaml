@@ -1,0 +1,99 @@
+---
+- title: Provisioning Activity - Previous Month
+  rpt_group: Custom
+  rpt_type: Custom
+  priority: 130
+  db: MiqRequest
+  cols:
+  - created_on
+  - v_approved_by
+  - approval_state
+  - description
+  - destination_type
+  - fulfilled_on
+  - region_number
+  - type
+  - userid
+  include: {}
+  col_order:
+  - created_on
+  - v_approved_by
+  - approval_state
+  - description
+  - destination_type
+  - fulfilled_on
+  - region_number
+  - type
+  - userid
+  headers:
+  - !binary |-
+    RGF0ZSBDcmVhdGVk
+  - !binary |-
+    QXBwcm92ZWQgQnk=
+  - !binary |-
+    QXBwcm92YWwgU3RhdGU=
+  - !binary |-
+    RGVzY3JpcHRpb24=
+  - !binary |-
+    RGVzdGluYXRpb24gVHlwZQ==
+  - !binary |-
+    RnVsZmlsbGVkIE9u
+  - !binary |-
+    UmVnaW9uIE51bWJlcg==
+  - !binary |-
+    VHlwZQ==
+  - !binary |-
+    VXNlcmlk
+  conditions: !ruby/object:MiqExpression
+    exp:
+      !binary "SVM=":
+        !binary "ZmllbGQ=": MiqRequest-created_on
+        !binary "dmFsdWU=": Last Month
+    context_type: 
+  order: Ascending
+  sortby:
+  - region_number
+  group: c
+  graph: 
+  dims: 
+  filename: 
+  file_mtime: 
+  categories: []
+  timeline: 
+  template_type: report
+  where_clause: 
+  db_options: {}
+  generate_cols: 
+  generate_rows: 
+  col_formats:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  tz: 
+  time_profile_id: 
+  display_filter: 
+  col_options:
+    requester_name:
+      :break_label: ! '["Provision.Request : Requester Name"]: '
+    !binary "PDw8IE5vdGhpbmcgPj4+":
+      :break_label: ! '[]: '
+    created_on:
+      :break_label: ! '[" Date Created"]: '
+    region_number:
+      :break_label: ! '[" Region Number"]: '
+  rpt_options:
+    :pdf:
+      :page_size: !binary |-
+        VVMtTGV0dGVy
+    :queue_timeout: 
+    :summary:
+      :hide_detail_rows: false
+  miq_group_id: 1000000000013
+  user_id: 1000000000003
+  menu_name: Provisioning Activity - Previous Month
