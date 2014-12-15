@@ -20,8 +20,8 @@ This is the format of individual extensions in the repo:
     - miq_ver: manageiq_release (right now this is 'anand')
     - dependencies: comma,delimited,list
     - src_url: http://github.com/or/whatever/git/interface/you/use
+    - license: any OSI-approved license (see opensource.org/licenses)
 
-We're looking to mock up an index page very soon. If you'd like to help us by adding your extensions, it would be much appreciated!
 
 How to Add Your Extension
 =========================
