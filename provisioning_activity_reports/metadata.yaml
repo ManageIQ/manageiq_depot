@@ -1,11 +1,11 @@
 author: jcornell123
-collaborator: 
+collaborator: none  
 date: 2014-12-10
 name: Provisioning Activity Reports
-slug: Provisioning Activity Reports
-tags: automate, reports
+slug: provisioning_activity_reports
+tags: automate, reports 
 description: |
-5 reports which provide provisioning activity for the current Month, Quarter, YTD and previous Month and Quarter
+    Five reports which provide provisioning activity for the current Month, Quarter, YTD and previous Month and Quarter
 version: 0.1
 miq_ver: anand and cloudforms 3.x
 dependencies: none
