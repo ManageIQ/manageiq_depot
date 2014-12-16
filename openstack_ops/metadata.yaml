@@ -1,0 +1,14 @@
+author: msolberg 
+date: 2014-12-16
+name: OpenStack Ops
+slug: openstack_ops
+tags: automate, policy
+description: |
+  This is a library of automate methods to assist in the operation of OpenStack
+  platforms
+version: 0.1
+miq_ver: anand
+dependencies: ruby 1.9.x
+src_url: https://github.com/msolberg/manageiq_depot/tree/master/openstack_ops
+license: GPL
+

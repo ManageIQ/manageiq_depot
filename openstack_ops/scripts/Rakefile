@@ -1,0 +1,13 @@
+task :default => [:clean, :zip]
+
+desc "Build zip file for import into CFME"
+task :zip do
+  puts "Building zip file."
+  `/usr/bin/zip -r OpenStackOps.zip OpenStackOps`
+end
+
+desc "Clean out old zip file"
+task :clean do
+  puts "Removing old zip file."
+  `/bin/rm -f OpenStackOps.zip` 
+end
