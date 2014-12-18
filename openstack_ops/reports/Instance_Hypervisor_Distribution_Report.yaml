@@ -1,0 +1,58 @@
+---
+- MiqReport:
+    title: Instance Hypervisor Distribution
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 
+    db: VmCloud
+    cols:
+    - name
+    include:
+      managed:
+        columns:
+        - hypervisor
+      ext_management_system:
+        columns:
+        - name
+    col_order:
+    - name
+    - managed.hypervisor
+    - ext_management_system.name
+    headers:
+    - Name
+    - OpenStack Hypervisor
+    - Cloud/Infrastructure Provider Name
+    conditions: 
+    order: Ascending
+    sortby:
+    - managed.hypervisor
+    group: 
+    graph:
+      :type: Column
+      :count: 10
+      :other: false
+    dims: 1
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options: {}
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    tz: 
+    time_profile_id: 
+    display_filter: 
+    col_options: {}
+    rpt_options:
+      :pdf:
+        :page_size: US-Letter
+      :queue_timeout: 
+    miq_group_id: 1000000000001
+    user_id: 1000000000001
+    menu_name: Instance Hypervisor Distribution
