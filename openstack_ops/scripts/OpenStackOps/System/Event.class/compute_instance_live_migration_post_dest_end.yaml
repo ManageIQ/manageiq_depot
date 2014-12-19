@@ -1,0 +1,12 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: compute.instance.live_migration.post.dest.end
+    inherits: 
+    description: 
+  fields:
+  - rel1:
+      value: /OpenStackOps/System/Event/OpenStackDiscovery
