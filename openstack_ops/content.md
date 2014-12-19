@@ -101,7 +101,7 @@ The Requests in this library can also be called from Control Policies.  To initi
 * Provide a description for the Policy and click "Add" to create the policy.
 * Select "Edit this Policy's Event assignments" from the "Configuration" menu.
 * Select any events you want to trigger the Request.
-![](image/policy_event_assignments.jpg)
+![](images/policy_event_assignments.jpg)
 * Select the event in the left hand navigation and select "Edit Actions for this Policy Event" from the "Configuration" menu.
 ![](images/add_policy_actions.jpg)
 * Select Actions from the "Available Actions" control.
