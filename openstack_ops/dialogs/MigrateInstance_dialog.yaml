@@ -1,0 +1,43 @@
+---
+- description: MigrateInstance
+  buttons: submit,cancel
+  label: MigrateInstance
+  dialog_tabs:
+  - description: Migration Details
+    display: edit
+    label: MigrationDetails
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: MigrationDetailBox
+      display: edit
+      label: MigrationDetailBox
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: TargetHypervisor
+        description: Target Hypervisor
+        type: DialogFieldDynamicList
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: 
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :load_values_on_init: false
+          :show_refresh_button: false
+        label: Target Hypervisor
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
