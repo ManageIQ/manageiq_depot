@@ -8,7 +8,7 @@ object:
     inherits: 
     description: 
   fields:
-  - meth2:
-      value: TagHypervisor
-  - meth1:
-      value: ConvertMetadataToTags
+  - rel1:
+      value: /OpenStackOps/OpenStack/Methods/TagHypervisor
+  - rel2:
+      value: /OpenStackOps/OpenStack/Methods/ConvertMetadataToTags
