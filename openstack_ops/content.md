@@ -51,16 +51,16 @@ the "VM and Instance" objects.  To create these buttons:
 * Select the "Buttons" menu on the left hand navigation.
 * Select "VM and Instance".
 * Choose "Add a new Button Group" from the "Configuration" dropdown.
+![](images/create_button_group.jpg)
 * Give the Button Group a name, hover text, and an image.
-![](images/enable_domain.jpg)
 * Create the group by clicking the "Add" button in the lower right.
 * Select the "OpenStack" button group on the left hand navigation.
 * Select "Add a new Button" from the "Configuration" dropdown.
+![](images/create_button.jpg)
 * Give the button text, hover text, and an image.
 * Select "Request" from the System/Process drop down
 * Enter the name of the Request in the Request box.
 * If required, specify a dialog.  Instructions on importing service dialogs are below.
-![](images/create_button.jpg)
 * Create the button by clicking the "Add" button in the lower right.
 
 To import Service Dialogs:
@@ -69,8 +69,9 @@ To import Service Dialogs:
 * Select the "Import/Export" menu on the left hand navigation.
 * Select "Service Dialog Import/Export".
 * Browse to the dialog YAML file from the "dialogs" directory under "openstack_ops".
-![](images/upload_dialog.jpg)
+![](images/import_dialog.jpg)
 * Select "Upload".
+![](images/import_dialog2.jpg)
 * Select "Commit" to finish importing the dialog.
 
 To re-link dynamic drop down menus for the dialog:
@@ -79,36 +80,36 @@ To re-link dynamic drop down menus for the dialog:
 * Select "Service Dialogs" from the left hand navigation.
 * Select the dialog box from the navigation.
 * Select "Edit this Dialog" from the "Configuration" menu.
+![](images/update_drop_downs.jpg)
 * Select the element containing the drop down list.
 * Specify the appropriate instance under "Options".
 * Click "Save" to save the changes.
-![](images/update_drop_downs.jpg)
 
 The Requests in this library can also be called from Control Policies.  To initiate a Request from a Control Policy:
 
 * Navigate to "Control": "Explorer".
 * Select "Actions" from the left hand navigation.
 * Select "Add a new Action" from the "Configuration" menu.
+![](images/add_action.jpg)
 * Provide a Description and select "Invoke a Custom Automation" from the "Action Type" drop down list.
 * Enter "create" for the "Starting Message" and the name of the Request in the "Request" field.
-![](images/add_action.jpg)
 * Click "Add" to add the new action.
 * Select "Policies" from the left hand navigation.
 * Select "Vm Control Policies" from the left hand navigation.
 * Select "Add a new Vm Control Policy from the "Configuration" menu.
-* Provide a description for the Policy and click "Add" to create the policy.
 ![](images/add_policy.jpg)
+* Provide a description for the Policy and click "Add" to create the policy.
 * Select "Edit this Policy's Event assignments" from the "Configuration" menu.
 * Select any events you want to trigger the Request.
 ![](image/policy_event_assignments.jpg)
 * Select the event in the left hand navigation and select "Edit Actions for this Policy Event" from the "Configuration" menu.
-* Select Actions from the "Available Actions" control.
 ![](images/add_policy_actions.jpg)
+* Select Actions from the "Available Actions" control.
 * Click "Save" to add the actions to the event.
 * Select "Policy Profiles" from the left hand navigation.
 * Select "Add a new Policy Profile" from the "Configuration" drop down.
-* Provide a description for the profile and select policies from the "Available Policies" drop down.
 ![](images/create_policy_profile.jpg)
+* Provide a description for the profile and select policies from the "Available Policies" drop down.
 * Click "Add" to create the policy profile.
 * This profile can then be applied to OpenStack cloud providers.
 
