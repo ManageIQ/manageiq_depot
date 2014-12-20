@@ -21,17 +21,17 @@ Automate Extension Overview
 ---------------------------
 The passwords themselves are available after an instance is deployed via ```get_password_data``` call to an AWS::EC2::Client Object.  This get_password data is not available for some time after an instance is deployed (3-5 minutes in my testing).  Once you get the data, you must be able to decrypt it using the private key portion of an Amazon EC2 KeyPair Object. In this automate extension, you should learn the following important items:
 
-- How to get a Ruby AWS::EC2 Object in Automate
-- How to create an AWS::EC2::KeyPair object as part of Automate
-- How to save an AWS::EC2::KeyPair private key data for later use in automate.
+- How to get a Ruby `AWS::EC2` Object in Automate
+- How to create an `AWS::EC2::KeyPair` object as part of Automate
+- How to save an `AWS::EC2::KeyPair` private key data for later use in automate.
 - How to use the Automate concept of Re-Entrancy to wait until PasswordData has been set by AWS on an instance
 - How to Send an Email from automate.
 
 
 
-###### How to get an AWS::EC2 Object
+#### How to get an AWS::EC2 Object
 
-The Automate Model has the concept of a Management System.  The Management System object has authentication and access credentials that are associated with it an may be retrieved as part of the object.  Management System objects may be obtained from a "VM" object via the `vm.ext_management_system` call, or from $evm.vmdb searches.  Once you have the management system object for an Amazon Cloud Provider in ManageIQ, you can easily extend the automate model by using the pre-installed `aws-sdk` ruby gem to connect to AWS programmatically.  Here is a snippet of example code that retrives the object from the VMDB by region name, and gets an ruby AWS::EC2 Object.
+The Automate Model has the concept of a Management System.  The Management System object has authentication and access credentials that are associated with it an may be retrieved as part of the object.  Management System objects may be obtained from a "VM" object via the `vm.ext_management_system` call, or from $evm.vmdb searches.  Once you have the management system object for an Amazon Cloud Provider in ManageIQ, you can easily extend the automate model by using the pre-installed `aws-sdk` ruby gem to connect to AWS programmatically.  Here is a snippet of example code that retrives the object from the VMDB by region name, and gets an ruby `AWS::EC2` Object.
 ```
           def get_aws_object(ext_mgt_system, type="EC2")
             require 'aws-sdk'
@@ -55,9 +55,9 @@ Again, this is just an example snippet.
 PRO TIP: You may notice the get_aws_object method has a type parameter which defaults to EC2.  One could also use this same method to get a connection to the AWS RDS service, or the AWS S3 service.  One could use whichever services are enabled as part of this account which enables users to extend into all parts of the AWS environment, not just virtual machines.
 	
 
-###### How to Create an AWS::EC2::KeyPair
+#### How to Create an AWS::EC2::KeyPair
 
-Now that you know how to get an AWS::EC2 Object, you can literally do anything in ManageIQ Automate that is available in EC2 including creating a brand new EC2 KeyPair.  In AWS, if you launch a Windows instances with an AWS KeyPair, you can then use that keypair to decrypt the password for the Administrator user.  So I recommend simply creating throwaway EC2 KeyPairs that are only used to launch a Windows instance and decrypt the password.  They need not be used for anything ever again.
+Now that you know how to get an `AWS::EC2` Object, you can literally do anything in ManageIQ Automate that is available in EC2 including creating a brand new EC2 KeyPair.  In AWS, if you launch a Windows instances with an AWS KeyPair, you can then use that keypair to decrypt the password for the Administrator user.  So I recommend simply creating throwaway EC2 KeyPairs that are only used to launch a Windows instance and decrypt the password.  They need not be used for anything ever again.
 
 The trick here is to get the KeyPair and save it for later use.  In this example, we'll save the private key pair data in an Automate ServiceTemplateProvisioning Task object.  This implies that this will work within the context of a ManageIQ generic service catalog item deployment.
 ```
@@ -68,7 +68,7 @@ The trick here is to get the KeyPair and save it for later use.  In this example
           # presuming you already have an EC2 Object, you can now create a new keypair
           keypair = ec2.key_pairs.create("mykeypair")
 ```
-###### How to Save an AWS::EC2::KeyPair private key for later use
+#### How to Save an AWS::EC2::KeyPair private key for later use
 
 Once you've created the `AWS::EC2::KeyPair` object, you can save it in the task object using the `set_option` call.  The private key_pair data must be saved because the private key is only available in teh AWS SDK when the keypair is created.  Later calles to retrive an existing key pair do not retrieve the private key.  It is up to the programmer to save this someplace it can be retrieved safely and securely.
 ```
@@ -120,6 +120,6 @@ Now that you have the password, it might be useful to send an email.  Luckily, t
 Case Study
 ----------
 
-Now that I've given an overview, here is a specific example.  
+Now that I've given an overview, here is a specific example. (TBD)
 
 
