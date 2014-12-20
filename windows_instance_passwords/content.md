@@ -10,7 +10,7 @@ Background
 Windows AMIs in Amazon support the generation of randomized Administrator passwords and the retrieval and decryption of those passwords via API.  If the AMI enables the EC2Config service plugin and the Ec2SetPassword attribute is enabled, a randomized password is set that can be decrypted with the private key portion of an Amazon EC2 KeyPair object.  For those bundling up their own AMIs, you must set the Ec2SetPassword attribute when you bundle your AMI.  But if you use a public AMI, this should already be set for you.
 
 
-###### AWS Reference Docs:
+#### AWS Reference Docs:
 - http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetPasswordData.html
 - AWS::EC2 Ruby Object: http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/EC2.html
 - AWS::EC2::Client Ruby Object: http://docs.aws.amazon.com/AWSRubySDK/latest/AWS/EC2/Client.html
@@ -76,7 +76,7 @@ Once you've created the `AWS::EC2::KeyPair` object, you can save it in the task 
           task.set_option(:aws_keypair, "mykeypair")
 ```
 
-###### How to Use Re-Entrancy in Automate
+#### How to Use Re-Entrancy in Automate
 
 Once you have an `AWS::EC2::KeyPair` object and its `private_key` data, all you need to do is provision and instance.  Once the instance provisioning is kicked off, you unfortunately have to wait until the AWS Ec2Config service actually sets and makes available the password data for the new instance you've created.  In my experience, this generally takes between 3 and 5 minutes (at least for the AWS regions in the US.  Luckily, ManageIQ automate is reentrant.  This gives coders the ability to periodically check a service and wait until it completes before gathering data and moving on to the next step in the overall process.  Here is an example snippet which takes a VM object, checks to see if the password data is available, waits if not using Automate retry, and the gets and decrypts the password once it is ready.
 ```
@@ -108,7 +108,7 @@ Once you have an `AWS::EC2::KeyPair` object and its `private_key` data, all you 
                 Base64.decode64(password_response.password_data))
 ```
          
-###### How to Send an Email from Automate
+#### How to Send an Email from Automate
 
 Now that you have the password, it might be useful to send an email.  Luckily, there is a function available for you to send email from Automate.
 ```
