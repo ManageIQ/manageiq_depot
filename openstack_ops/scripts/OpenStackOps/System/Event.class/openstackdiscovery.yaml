@@ -1,0 +1,14 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: OpenStackDiscovery
+    inherits: 
+    description: 
+  fields:
+  - rel1:
+      value: /OpenStackOps/OpenStack/Methods/TagHypervisor
+  - rel2:
+      value: /OpenStackOps/OpenStack/Methods/ConvertMetadataToTags
