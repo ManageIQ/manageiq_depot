@@ -26,6 +26,7 @@ OpenStackOps  OpenStackOps.zip  Rakefile
 The library consists of the following components:
 
 **/OpenStackOps/OpenStack/Methods**:  This is a set of methods which operate on OpenStack instances.  The following methods are implemented:
+
 * **ConvertMetadataToTags**: Converts Nova Metadata to ManageIQ tags.
 * **ListMigrationTargets**: Retrieve a list of possible migration targets for a virtual instance.  (For use in generating dynamic drop down lists)
 * **MigrateInstance**: Live Migrate an Instance to the hypervisor specified in dialog_TargetHypervisor
@@ -34,12 +35,14 @@ The library consists of the following components:
 * **VerifyMetadata**: Example method which verifies that a particular metadata tag exists.
 
 **/OpenStackOps/System/Event**: The following Events are defined in the library:
+
 * **compute.instance.live_migration._rollback.end**: Reruns OpenStackDiscovery after live migration events.
 * **compute.instance.live_migration.post.dest.end**: Reruns OpenStackDiscovery after live migration events.
 * **compute.instance.rebuild.end**: Reruns OpenStackDiscovery after rebuild events.
 * **OpenStackDiscovery**: Runs the ConvertMetadataToTags and TagHypervisor methods on OpenStackDiscovery Requests.
 
 **/OpenStackOps/System/Request**: The following Requests are defined in the library:
+
 * **MigrateInstance**: Initiates a live migration of an instance.
 * **OpenStackDiscovery**: Used to run tagging operations on new instances.
 * **RebuildInstance**: Initiates a rebuild of an instance.
