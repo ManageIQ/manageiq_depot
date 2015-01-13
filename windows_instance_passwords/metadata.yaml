@@ -1,0 +1,11 @@
+author: dcostakos
+date: 2015-01-14
+name: Windows Instance Passwords in AWS
+slug: windows_instance_passwords
+tags: automate, dev, aws
+decription: |
+  Extend Automate to get Windows Instance passwords in AWS via the GetPasswordData API call.
+version: 1.0.0
+miq_ver: anand
+dependencies: ruby 1.9.x, ruby aws-sdk gem 1.44 or later
+src_url: https://github.com/dcostakos/manageiq_depot/windows_instance_passwords
