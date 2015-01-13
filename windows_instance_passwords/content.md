@@ -1,7 +1,7 @@
 
 One of the most amazing, yet rarely discussed, benefits of using ManageIQ is the flexibility end users get through the Automate Model.  If ManageIQ does not support a feature out-of-the-box, the Automate Model is there for you to extend the platform and add basic support for the features you'd like to add to automate.  All you need to extend the platform is a ruby gem (or gems) to support the features you want to add, some ruby scripting skill, and some experience with the automate model.
 
-This post in the ManageIQ depot is meant to be a case study of sorts designed to share some experience on how to get started with ManageIQ.  I'll describe how to extend the automate model to deploy Amazon EC2 Windows AMIs and using AWS and set randomized Windows Administrator passwords using the EC2 "GetPasswordData" API call.  Finally, I share a full ManageIQ state machine to accomplish an example of a specific case study that uses this GetPasswordData API call.
+This post in the ManageIQ depot is meant to be a case study of sorts designed to share some experience on how to get started with ManageIQ.  I'll describe how to extend the automate model to deploy Amazon EC2 Windows AMIs and, using AWS EC2Config, set randomized Windows Administrator passwords using the EC2 "GetPasswordData" API call.  Finally, I share a full ManageIQ state machine to accomplish an example of a specific case study that uses this GetPasswordData API call.
 
 Reference: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetPasswordData.html
 
@@ -131,30 +131,17 @@ needed to deploy multiple Windows instances from a public AMI and collect the
 windows instance passwors via AWS.  End users would then RDP to the instance
 from a laptop or home PC and use them in the training class.  
 
-I have attached screenshots of the following:
+I have attached screenshots and code for the following so you can implement this yourself:
 
-![The State Machine for provisioning the public AMI](images/screenshot_statemachine.png)
-
-![Catalog Item Screenshot](images/screenshot_amazon_training_class_catalog_item.png)
-
-![The Service Dialog for the Catalog Item](scripts/amazon_catalogitem_training_class_dialog.yaml)
-
-![Dynamic Dropdown: List Amazon EMS](scripts/listAmazonEMS.rb)
-
-![State Machine: Initialization](scripts/trainingClassItemInitialization.rb)
-
-![State Machine: Create AWS Security Group](scripts/createAWSSecurityGroup.rb)
-
-![State Machine: Create AWS Keypair](scripts/createAWSKeypair.rb)
-
-![State Machine: Deploy a Public AMI](scripts/deployPublicAMI.rb)
-
-![State Machine: Check Status of AMI for Password](scripts/publicAMIInstanceStatus.rb)
-
-![State Machine: Associate VMs with Service](scripts/publicAMIAssociateWithService.rb)
-
-
-
-All the individual scripts required to make the code work
+- [Screenshot - The State Machine for provisioning the public AMI](images/screenshot_statemachine.png)
+- [Screenshot - Catalog Item](images/screenshot_amazon_training_class_catalog_item.png)
+- [Importable Dialog - The Service Dialog for the Catalog Item](scripts/amazon_catalogitem_training_class_dialog.yaml)
+- [Code - Dynamic Dropdown - List Amazon EMS](scripts/listAmazonEMS.rb)
+- [Code - State Machine - Initialization](scripts/trainingClassItemInitialization.rb)
+- [Code - State Machine - Create AWS Security Group](scripts/createAWSSecurityGroup.rb)
+- [Code - State Machine - Create AWS Keypair](scripts/createAWSKeypair.rb)
+- [Code - State Machine - Deploy a Public AMI](scripts/deployPublicAMI.rb)
+- [Code - State Machine - Check Status of AMI for Password](scripts/publicAMIInstanceStatus.rb)
+- [Code - State Machine - Associate VMs with Service](scripts/publicAMIAssociateWithService.rb)
 
 
