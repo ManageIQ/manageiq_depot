@@ -19,7 +19,7 @@ Windows AMIs in Amazon support the generation of randomized Administrator passwo
 
 Automate Extension Overview
 ---------------------------
-The passwords themselves are available after an instance is deployed via ```get_password_data``` call to an AWS::EC2::Client Object.  This get_password data is not available for some time after an instance is deployed (3-5 minutes in my testing).  Once you get the data, you must be able to decrypt it using the private key portion of an Amazon EC2 KeyPair Object. In this automate extension, you should learn the following important items:
+The passwords themselves are available after an instance is deployed via ```get_password_data``` call to an `AWS::EC2::Client` Object.  This get_password data is not available for some time after an instance is deployed (3-5 minutes in my testing).  Once you get the data, you must be able to decrypt it using the private key portion of an Amazon EC2 KeyPair Object. In this automate extension, you should learn the following important items:
 
 - How to get a Ruby `AWS::EC2` Object in Automate
 - How to create an `AWS::EC2::KeyPair` object as part of Automate
@@ -78,7 +78,9 @@ Once you've created the `AWS::EC2::KeyPair` object, you can save it in the task 
 
 #### How to Use Re-Entrancy in Automate
 
-Once you have an `AWS::EC2::KeyPair` object and its `private_key` data, all you need to do is provision and instance.  Once the instance provisioning is kicked off, you unfortunately have to wait until the AWS Ec2Config service actually sets and makes available the password data for the new instance you've created.  In my experience, this generally takes between 3 and 5 minutes (at least for the AWS regions in the US.  Luckily, ManageIQ automate is reentrant.  This gives coders the ability to periodically check a service and wait until it completes before gathering data and moving on to the next step in the overall process.  Here is an example snippet which takes a VM object, checks to see if the password data is available, waits if not using Automate retry, and the gets and decrypts the password once it is ready.
+Once you have an `AWS::EC2::KeyPair` object and its `private_key` data, all you need to do is provision and instance.  Once the instance provisioning is kicked off, you unfortunately have to wait until the AWS Ec2Config service actually sets and makes available the password data for the new instance you've created.  In my experience, this generally takes between 3 and 5 minutes (at least for the AWS regions in the US).  Luckily, ManageIQ automate is reentrant.  This gives coders the ability to periodically check a service and wait until it completes before gathering data and moving on to the next step in the overall process.  At the 10,000 fot level, ManageIQ handles the rescheduling of tasks if they need to wait for a while.  The programmer simply specifies the amount of time it should wait, and you exit.  ManageIQ will successfully reschedule the task to run again in roughly the amount of time you specific (give or take a few seconds.
+
+Here is an example snippet which takes a VM object, checks to see if the password data is available, waits if not using Automate retry, and the gets and decrypts the password once it is ready.
 ```
           # Retry Method
           # basic retry logic
@@ -120,6 +122,39 @@ Now that you have the password, it might be useful to send an email.  Luckily, t
 Case Study
 ----------
 
-Now that I've given an overview, here is a specific example. (TBD)
+Now that the overview is complete, here is a specific use case where it has been
+used by a real customer.
+
+This customer simply wanted a service catalog item where they could provide
+a self-service catalog item to internal training class trainers.  These trainers
+needed to deploy multiple Windows instances from a public AMI and collect the
+windows instance passwors via AWS.  End users would then RDP to the instance
+from a laptop or home PC and use them in the training class.  
+
+I have attached screenshots of the following:
+
+![The State Machine for provisioning the public AMI](images/screenshot_statemachine.png)
+
+![Catalog Item Screenshot](images/screenshot_amazon_training_class_catalog_item.png)
+
+![The Service Dialog for the Catalog Item](scripts/amazon_catalogitem_training_class_dialog.yaml)
+
+![Dynamic Dropdown: List Amazon EMS](scripts/listAmazonEMS.rb)
+
+![State Machine: Initialization](scripts/trainingClassItemInitialization.rb)
+
+![State Machine: Create AWS Security Group](scripts/createAWSSecurityGroup.rb)
+
+![State Machine: Create AWS Keypair](scripts/createAWSKeypair.rb)
+
+![State Machine: Deploy a Public AMI](scripts/deployPublicAMI.rb)
+
+![State Machine: Check Status of AMI for Password](scripts/publicAMIInstanceStatus.rb)
+
+![State Machine: Associate VMs with Service](scripts/publicAMIAssociateWithService.rb)
+
+
+
+All the individual scripts required to make the code work
 
 
