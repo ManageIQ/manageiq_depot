@@ -1,0 +1,183 @@
+---
+- description: 
+  buttons: submit,cancel
+  label: Amazon - CatalogItem - Training Class
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: Main Tab
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Main Box
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: mid
+        description: 
+        type: DialogFieldDynamicList
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: 
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :load_values_on_init: true
+          :show_refresh_button: true
+        label: Amazon Region
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+      - name: class_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Class Name
+        position: 1
+        validator_type: regex
+        validator_rule: ^[a-zA-Z0-9]{0,10}$
+        reconfigurable: 
+      - name: instance_flavor
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: 
+        values:
+        - - t2.micro
+          - t2.micro - $0.022 per hour, EBS
+        - - t2.small
+          - t2.small - $0.044 per hour, EBS
+        - - t2.medium
+          - t2.medium - $0.088 per hour, EBS
+        - - m3.medium
+          - m3.medium - $0.140 per hour, 1x4 SSDs
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :none
+          :sort_order: :ascending
+        label: Instance Flavor
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+      - name: student_count
+        description: 
+        type: DialogFieldDropDownList
+        data_type: integer
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - '1'
+          - '1'
+        - - '2'
+          - '2'
+        - - '3'
+          - '3'
+        - - '4'
+          - '4'
+        - - '5'
+          - '5'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :value
+          :sort_order: :ascending
+        label: Student Count
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+      - name: email
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: dcostako@redhat.com
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Instructor Email
+        position: 4
+        validator_type: regex
+        validator_rule: ^[a-zA-Z0-9\._.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$
+        reconfigurable: 
+      - name: allocate_elastic_ip
+        description: 
+        type: DialogFieldRadioButton
+        data_type: integer
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '0'
+        values:
+        - - '1'
+          - 'Yes'
+        - - '0'
+          - 'No'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :none
+          :sort_order: :ascending
+        label: Use Elastic IPs?
+        position: 5
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
