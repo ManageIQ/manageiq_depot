@@ -1,0 +1,14 @@
+author: pemcg
+collaborator:
+date: 2015-02-27
+name: Delete VM from Button
+slug: delete_vm_from_button
+tags: automate, 
+description: |
+  Add a button to delete a VM. This is implemented through a simple state
+  machine, and calls the built-in retirement methods to power off the VM,
+  retire it, remove from the provider, and delete from the VMDB.
+version: 1.0
+miq_ver: anand
+dependencies: ruby 1.9.x, ruby 2.x
+src_url: https://github.com/ManageIQ/manageiq_depot/tree/master/delete_vm_from_button
