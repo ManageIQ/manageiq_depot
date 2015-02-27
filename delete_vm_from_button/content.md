@@ -20,7 +20,10 @@ You should see a new namespace appear containing the imported code, like so:
 ![](images/namespace.jpg)
 
 
-Now we need to create a service dialog and a button. The dialog is nice and simple. We'll call it "DeleteVM":
+Now we need to create a service dialog and a button. The dialog is nice and simple.
+
+
+We'll call it "DeleteVM":
 
 
 ![](images/dialog_1.jpg)
@@ -39,14 +42,20 @@ We'll give it a tab called "Confirm", a Box called "Click 'Submit' to Delete the
 
 
 Now we create a Button Group called "VM Actions" for the _VM and Instance_ Object Type, and create a Button in this
-group called "Delete VM". The Button calls the out-of-the-box Call_Instance method, with the arguments of namespace,
+group called "Delete VM".
+
+
+The Button calls the out-of-the-box Call_Instance method, with the arguments of namespace,
 class and instance that point to our State Machine:
 
 
 ![](images/button_creation.jpg)
 
 
-Finally we find a VM that we want to delete. Click on the VM details and the Button Group and Button should be visible:
+Finally we find a VM that we want to delete.
+
+
+Click on the VM details and the Button Group and Button should be visible:
 
 
 ![](images/button_in_use_1.jpg)
