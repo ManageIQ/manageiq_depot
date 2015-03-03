@@ -1,0 +1,275 @@
+---
+Export:
+  __domain__.yaml:
+    object_type: domain
+    version: 1.0
+    object:
+      attributes:
+        name: Export
+        description: Export
+        display_name: 
+        system: false
+        priority: 3
+        enabled: false
+  Buttons:
+    __namespace__.yaml:
+      object_type: namespace
+      version: 1.0
+      object:
+        attributes:
+          name: Buttons
+          description: Buttons
+          display_name: 
+          system: 
+          priority: 
+          enabled: 
+    DeleteVM.class:
+      __class__.yaml:
+        object_type: class
+        version: 1.0
+        object:
+          attributes:
+            description: 
+            display_name: Delete VM State Machine
+            name: DeleteVM
+            type: 
+            inherits: 
+            visibility: 
+            owner: 
+          schema:
+          - field:
+              aetype: state
+              name: TagVM
+              display_name: 
+              datatype: string
+              priority: 1
+              owner: 
+              default_value: 
+              substitute: true
+              message: create
+              visibility: 
+              collect: 
+              scope: 
+              description: 
+              condition: 
+              on_entry: 
+              on_exit: 
+              on_error: 
+              max_retries: 
+              max_time: 
+          - field:
+              aetype: relationship
+              name: StopVM
+              display_name: 
+              datatype: string
+              priority: 2
+              owner: 
+              default_value: 
+              substitute: true
+              message: create
+              visibility: 
+              collect: 
+              scope: 
+              description: 
+              condition: 
+              on_entry: 
+              on_exit: 
+              on_error: 
+              max_retries: 
+              max_time: 
+          - field:
+              aetype: relationship
+              name: RetireVM
+              display_name: 
+              datatype: string
+              priority: 3
+              owner: 
+              default_value: 
+              substitute: true
+              message: create
+              visibility: 
+              collect: 
+              scope: 
+              description: 
+              condition: 
+              on_entry: 
+              on_exit: 
+              on_error: 
+              max_retries: 
+              max_time: 
+      DeleteVMFromButton.yaml:
+        object_type: instance
+        version: 1.0
+        object:
+          attributes:
+            display_name: 
+            name: DeleteVMFromButton
+            inherits: 
+            description: 
+          fields:
+          - TagVM:
+              value: /Buttons/Methods/TagVM
+              on_entry: check_category_exists
+          - StopVM:
+              value: /Infrastructure/VM/Retirement/StateMachines/Methods/PowerOff
+          - RetireVM:
+              value: /Infrastructure/VM/Retirement/StateMachines/VMRetirement/Default
+      __methods__:
+        check_category_exists.rb: ! "#\n#            Automate Method\n#\nbegin\n  @method
+          = 'check_category_exists'\n  @log_prefix = \"[#{@method}]\"\n  $evm.log(\"info\",
+          \"Inline Method: <#{@log_prefix}>  EVM Automate Method Started\")\n  #\n
+          \ # Create a tag definition of lifecycle/retire_full\n  #\n  if $evm.execute('category_exists?',
+          \"lifecycle\")\n      $evm.log(\"info\", \"Inline Method: #{@log_prefix}
+          - Tag Classification 'lifecycle' already exists\")\n  else\n      $evm.log(\"info\",
+          \"Inline Method: #{@log_prefix} - Classification 'lifecycle' doesn't exist,
+          creating category\")\n      $evm.execute('category_create', :name => \"lifecycle\",
+          :single_value => false, :description => \"Lifecycle\")\n  end\n  if $evm.execute('tag_exists?',
+          'lifecycle', 'retire_full')\n    $evm.log(\"info\", \"Tag 'retire_full'
+          already exists for 'lifecycle'\")\n  else\n    $evm.log(\"info\", \"Inline
+          Method: #{@log_prefix} - Adding new tag: 'retire_full' in Category 'lifecycle'\")\n
+          \   $evm.execute('tag_create', \"lifecycle\", :name => 'retire_full', :description
+          => 'Full Retire annd Delete')\n  end\n  #\n  $evm.log(\"info\", \"Inline
+          Method: <#{@log_prefix}>  EVM Automate Method Ended\")\n  exit MIQ_OK\n
+          \ #\n  # Set Ruby rescue behavior\n  #\nrescue => err\n  $evm.log(\"error\",
+          \"#{@method} - [#{err}]\\n#{err.backtrace.join(\"\\n\")}\")\n  exit MIQ_ABORT\nend\n"
+        check_category_exists.yaml:
+          object_type: method
+          version: 1.0
+          object:
+            attributes:
+              name: check_category_exists
+              display_name: 
+              description: 
+              scope: instance
+              language: ruby
+              location: inline
+            inputs: []
+    Methods.class:
+      __class__.yaml:
+        object_type: class
+        version: 1.0
+        object:
+          attributes:
+            description: 
+            display_name: 
+            name: Methods
+            type: 
+            inherits: ''
+            visibility: 
+            owner: 
+          schema:
+          - field:
+              aetype: method
+              name: Execute
+              display_name: 
+              datatype: string
+              priority: 1
+              owner: 
+              default_value: 
+              substitute: true
+              message: create
+              visibility: 
+              collect: 
+              scope: 
+              description: 
+              condition: 
+              on_entry: 
+              on_exit: 
+              on_error: 
+              max_retries: 
+              max_time: 
+      TagVM.yaml:
+        object_type: instance
+        version: 1.0
+        object:
+          attributes:
+            display_name: 
+            name: TagVM
+            inherits: 
+            description: 
+          fields:
+          - Execute:
+              value: tag_vm
+      __methods__:
+        tag_vm.rb: ! "#\n#            Automate Method\n#\nbegin\n  @method = 'tag_vm'\n
+          \ @log_prefix = \"[#{@method}]\"\n  $evm.log(\"info\", \"Inline Method:
+          <#{@log_prefix}>  EVM Automate Method Started\")\n  #\n  #            Method
+          Code Goes here\n  #\n  vm = $evm.root['vm']\n  unless vm.nil?\n    unless
+          vm.tagged_with?('lifecycle','retire_full')\n      $evm.log(\"info\", \"Inline
+          Method: #{@log_prefix} - Tagging VM #{vm.name} with 'lifecycle/retire_full'\")\n
+          \     #vm.tag_assign('lifecycle/retire_full')\n    end\n    #\n    # Check
+          that the tag was assigned\n    #\n    #if vm.tagged_with?('lifecycle','retire_full')\n
+          \   #  $evm.log(\"info\", \"Inline Method: #{@log_prefix} - Tag 'lifecycle/retire_full'
+          is set for VM #{vm.name}\")\n    #  exit MIQ_OK\n    #else\n    #  $evm.log(\"error\",
+          \"Failed to set tag 'lifecycle/retire_full' for VM #{vm.name}\")\n    #
+          \ exit MIQ_ABORT\n    #end\n  end\n  #\n  $evm.log(\"info\", \"Inline Method:
+          <#{@log_prefix}>  EVM Automate Method Ended\")\n  exit MIQ_OK\n  #\n  #
+          Set Ruby rescue behavior\n  #\nrescue => err\n  $evm.log(\"error\", \"#{@method}
+          - [#{err}]\\n#{err.backtrace.join(\"\\n\")}\")\n  exit MIQ_ABORT\nend\n"
+        tag_vm.yaml:
+          object_type: method
+          version: 1.0
+          object:
+            attributes:
+              name: tag_vm
+              display_name: 
+              description: 
+              scope: instance
+              language: ruby
+              location: inline
+            inputs: []
+  .manifest.yaml:
+    __domain__.yaml:
+      classes: 2
+      instances: 2
+      method_files: 2
+      method_instances: 2
+      created_on: 2015-02-27 14:28:19.595285000 Z
+      updated_on: 2015-02-27 14:28:19.595285000 Z
+      size: 172
+      sha1: 52QWfFWlOH9IcONZjrf9zqCmGk8=
+    Buttons/__namespace__.yaml:
+      created_on: 2015-02-27 14:31:10.921323000 Z
+      updated_on: 2015-02-27 14:31:10.921323000 Z
+      size: 166
+      sha1: aWbfBVJMAcOUPlIujPfekaOgdA0=
+    Buttons/DeleteVM.class/__class__.yaml:
+      created_on: 2015-02-27 14:31:26.293152000 Z
+      updated_on: 2015-02-27 14:31:26.293152000 Z
+      size: 1318
+      sha1: zKjBsp1mb8hoBdfsMzjinWo1PdM=
+    Buttons/DeleteVM.class/DeleteVMFromButton.yaml:
+      created_on: 2015-02-27 14:33:26.149507000 Z
+      updated_on: 2015-02-27 14:34:45.505690000 Z
+      size: 415
+      sha1: X+eUq12hAxFjcSZh0pVsHfk9yaE=
+    Buttons/DeleteVM.class/__methods__/check_category_exists.rb:
+      created_on: 2015-02-27 14:33:40.834486000 Z
+      updated_on: 2015-02-27 14:33:40.834486000 Z
+      size: 1262
+      sha1: QrhaPbOv99EVHOKtaohWNKql2Og=
+    Buttons/DeleteVM.class/__methods__/check_category_exists.yaml:
+      created_on: 2015-02-27 14:33:40.834486000 Z
+      updated_on: 2015-02-27 14:33:40.834486000 Z
+      size: 201
+      sha1: 9SOtnbMuwoDkigbPiRmR/ERCf8I=
+    Buttons/Methods.class/__class__.yaml:
+      created_on: 2015-02-27 14:31:47.344983000 Z
+      updated_on: 2015-02-27 14:31:47.344983000 Z
+      size: 549
+      sha1: Xrd/4Qw/+motkulncLqsUujXPCM=
+    Buttons/Methods.class/TagVM.yaml:
+      created_on: 2015-02-27 14:32:51.257645000 Z
+      updated_on: 2015-02-27 14:32:51.257645000 Z
+      size: 172
+      sha1: 4TEYQhf+Cpq3jay6ZxeG/snvqL0=
+    Buttons/Methods.class/__methods__/tag_vm.rb:
+      created_on: 2015-02-27 14:33:07.705570000 Z
+      updated_on: 2015-02-27 14:33:07.705570000 Z
+      size: 1088
+      sha1: ySOJZfuOvSBDKuPY+BM7R7kemAk=
+    Buttons/Methods.class/__methods__/tag_vm.yaml:
+      created_on: 2015-02-27 14:33:07.705570000 Z
+      updated_on: 2015-02-27 14:33:07.705570000 Z
+      size: 186
+      sha1: 1wQoh95W/OdBGrVk2AaYfaglY7g=
