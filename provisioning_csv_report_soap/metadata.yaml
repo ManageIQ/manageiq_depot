@@ -1,0 +1,12 @@
+author: hyclak
+collaborator:   
+date: 2015-05-07
+name: Provisioning CSV Report SOAP
+slug: provisioning_csv_report_soap
+tags: automate, reports 
+description: |
+    Example script using the SOAP API to gather some information about provisioned VMs to create a CSV file.
+version: 0.1
+miq_ver: anand and cloudforms 3.x
+dependencies: none
+src_url: https://github.com/ManageIQ/manageiq_depot/tree/master/provisioning_csv_report_soap
