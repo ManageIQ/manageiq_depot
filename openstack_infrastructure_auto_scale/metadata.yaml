@@ -1,0 +1,12 @@
+author: tzumainn, lsmola
+collaborator:
+date: 2015-06-01
+name: OpenStack Infrastructure Auto-Scale
+slug: openstack_infrastructure_auto_scale
+tags: automate, policy
+description: |
+  Allow the OpenStack Infrastructure provider to perform auto-scale actions.
+version: 1.0
+miq_ver: anand
+dependencies: ruby 1.9.x, ruby 2.x
+src_url: https://github.com/ManageIQ/manageiq_depot/tree/master/openstack_infrastructure_auto_scale
