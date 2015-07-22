@@ -1,0 +1,16 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: IP_MGR_10_222_222_0
+    inherits: 
+    description: 
+  fields:
+  - vlan:
+      value: vmnet_10_222_222.x
+  - network:
+      value: 10.222.222.0/24
+  - gateway:
+      value: 10.222.222.1

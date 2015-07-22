@@ -1,0 +1,24 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: IP_Mgr_Lab_v4_0
+    inherits: 
+    description: 
+  fields:
+  - endpoint:
+      value: https://proteus.work.com
+  - username:
+      value: svcManageIQ
+  - password:
+      value:
+  - config_id:
+      value: '13'
+  - dns_id:
+      value: '1434'
+  - execute:
+      value: Proteus_AcquireIPAddress
+  - deexecute:
+      value: Proteus_ReleaseIPAddress
