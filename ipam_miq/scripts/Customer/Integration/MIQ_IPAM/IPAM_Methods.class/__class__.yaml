@@ -1,0 +1,156 @@
+---
+object_type: class
+version: 1.0
+object:
+  attributes:
+    description: 
+    display_name: 
+    name: IPAM_Methods
+    type: 
+    inherits: 
+    visibility: 
+    owner: 
+  schema:
+  - field:
+      aetype: attribute
+      name: signature
+      display_name: 
+      datatype: string
+      priority: 1
+      owner: 
+      default_value: Cloud Team
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: attribute
+      name: from_email_address
+      display_name: 
+      datatype: string
+      priority: 2
+      owner: 
+      default_value: ATGCloudAdmins@autotradergroup.com
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: attribute
+      name: to_email_address
+      display_name: 
+      datatype: string
+      priority: 3
+      owner: 
+      default_value: ATGCloudAdmins@autotradergroup.com
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: attribute
+      name: path_to_ipams
+      display_name: 
+      datatype: string
+      priority: 4
+      owner: 
+      default_value: /CAI/Integration/MIQ_IPAM/Network_Lookup/
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: attribute
+      name: max_reservation_retries
+      display_name: 
+      datatype: integer
+      priority: 5
+      owner: 
+      default_value: '20'
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: This value is the number of times the AcquireIPAddress will loop
+        thru and try to get a new IP if there is a conflict.  Ensures method doesn't
+        get into an infinite loop
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: attribute
+      name: db_low_warning
+      display_name: 
+      datatype: integer
+      priority: 6
+      owner: 
+      default_value: '5'
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: Start sending warning emails when IP remaining count  reaches this
+        value
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: method
+      name: execute
+      display_name: 
+      datatype: string
+      priority: 7
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 

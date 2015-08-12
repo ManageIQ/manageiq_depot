@@ -1,0 +1,26 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 10.22.22.36-qlab0036
+    name: 10.22.22.36
+    inherits: 
+    description: 
+  fields:
+  - vlan:
+      value: VMNET_10.22.22.X
+  - hostname:
+      value: qlab0036
+  - ipaddr:
+      value: 10.22.22.36
+  - submask:
+      value: 255.255.255.0
+  - gateway:
+      value: 10.22.22.1
+  - inuse:
+      value: 'TRUE'
+  - vlan2:
+      value: VMNET_172.45.55.X
+  - ipaddr2:
+      value: 172.45.55.36

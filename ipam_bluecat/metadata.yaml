@@ -6,7 +6,7 @@ slug: IPAM BlueCat Extension
 tags: automate, ipam, BlueCat
 description:
 This is an integration of ManageIQ automate to the BlueCat IP Address Management (IPAM) system.
-version: 0.1
+version: 1.0
 miq_ver: anand and cloudforms 3.x
 dependencies: none
 src_url: https://github.com/ManageIQ/manageiq_depot/tree/master/ipam_bluecat

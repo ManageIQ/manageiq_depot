@@ -1,0 +1,11 @@
+---
+object_type: domain
+version: 1.0
+object:
+  attributes:
+    name: Customer
+    description: Extension of MIQ Core Code
+    display_name: 
+    system: false
+    priority: 6
+    enabled: false
