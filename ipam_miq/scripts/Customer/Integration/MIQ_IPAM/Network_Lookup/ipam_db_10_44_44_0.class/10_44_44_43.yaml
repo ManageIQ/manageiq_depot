@@ -1,0 +1,22 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: 10.44.44.43
+    inherits: 
+    description: 
+  fields:
+  - vlan:
+      value: VMNET_10.44.44.X
+  - hostname:
+      value: web1063
+  - ipaddr:
+      value: 10.44.44.43
+  - submask:
+      value: 255.255.255.0
+  - gateway:
+      value: 10.44.44.1
+  - inuse:
+      value: 'FALSE'

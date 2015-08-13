@@ -41,27 +41,31 @@ begin
     ipam_source = vm_tags[:ipam_source]
   else
     vm_tags = vm.tags
-    ipam_source = vm.tags(:ipam_source).last
+    vm.tags.sort.each { |tag_element| tag_text = tag_element.split('/');
+    if tag_text.first == "ipam_source"
+      ipam_source = tag_text.last.to_s
+      log("info", " VM:<#{vm.name}> Category:<#{tag_text.first.inspect}> Tag:<#{tag_text.last.inspect}>")
+    end
+    }
+    log(:info, " --CAI--  vm.tags(:ipam_source) = #{ipam_source}")
   end
 
   log(:info," VM Tags: #{vm_tags.inspect}")
-  ipam_msg = ipam_source.nil? ? "* * IPAM not used" : "IPAM DB Name:  #{ipam_source}"
+  ipam_msg = ipam_source.nil? ? "* * BlueCat IPAM not used" : "BlueCat IPAM DB Name:  #{ipam_source}"
   log(:info," #{ipam_msg}")
 
-  ## Now we need to see if the
-  if ipam_source  # true if contains something so we'll redirect to the proper IPAM system
+   ## if ipam_source contains something and matches the IPAM manager source text, we'll redirect to the proper IPAM system
     if /ip_mgr/i =~ ipam_source   # regex to find the source that starts with IP_MGR (IE: IP_Mgr_Lab_v4_0)
       # redirect to bluecat release
-      log(:info, "- - Release the Reserved IP from BlueCat Proteus IPAM: /Customer/Integration/BlueCat_IPAM/BlueCat/#{ipam_source}#release")
+      log(:info, "- - Release the Reserved IP from BlueCat Proteus IPAM: /Customer/Integration/MIQ_IPAM/BlueCat/#{ipam_source}#release")
       $evm.instantiate("/Customer/Integration/BlueCat_IPAM/BlueCat/#{ipam_source}#release")
       sleep(30.seconds)
     else
       #redirect to internal CF IPAM release method
       log(:info, "- - Release the Reserved IP from MIQ internal IPAM")
-      $evm.instantiate("/Customer/Integration/MIQ_IPAM/IPAM_Methods/IPAM_Release_Tagged_Name")
+      $evm.instantiate("/Customer/Integration/MIQ_IPAM/IPAM_Methods/miq_release_ip_address")
       sleep(30.seconds)
     end
-  end
   #
   # Exit method
   #

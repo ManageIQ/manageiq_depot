@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MiqAeDatastore version="1.0">
+  <MiqAeClass name='IPAM_DB_TEST_NETWORK' namespace='Integration/MIQ_IPAM'>
+    <MiqAeSchema> 
+      <MiqAeField name='vlan' substitute='true' aetype='attribute' datatype='string' priority='1' message='create'></MiqAeField> 
+      <MiqAeField name='hostname' substitute='true' aetype='attribute' datatype='string' priority='2' message='create'></MiqAeField> 
+      <MiqAeField name='ipaddr' substitute='true' aetype='attribute' datatype='string' priority='3' message='create'></MiqAeField> 
+      <MiqAeField name='submask' substitute='true' aetype='attribute' datatype='string' priority='4' message='create'></MiqAeField> 
+      <MiqAeField name='gateway' substitute='true' aetype='attribute' datatype='string' priority='5' message='create'></MiqAeField> 
+      <MiqAeField name='inuse' substitute='true' aetype='attribute' datatype='string' priority='6' message='create'></MiqAeField> 
+      <MiqAeField name='date_released' substitute='true' aetype='attribute' datatype='string' priority='7' message='create'></MiqAeField> 
+      <MiqAeField name='date_acquired' substitute='true' aetype='attribute' datatype='string' priority='8' message='create'></MiqAeField> 
+      <MiqAeField name='reserve_token' substitute='true' aetype='attribute' datatype='string' priority='9' message='create'></MiqAeField> 
+    </MiqAeSchema>
+   <MiqAeInstance name='10.11.11.100' display_name='10.11.11.100-test01'>
+    <MiqAeField name='vlan'> VMNET_10.11.11.0/24 </MiqAeField>
+    <MiqAeField name='hostname'> test01 </MiqAeField>
+    <MiqAeField name='ipaddr'> 10.11.11.100 </MiqAeField>
+    <MiqAeField name='submask'> 255.255.255.0 </MiqAeField>
+    <MiqAeField name='gateway'> 10.11.11.65 </MiqAeField>
+    <MiqAeField name='inuse'> TRUE </MiqAeField>
+    <MiqAeField name='date_released'>  </MiqAeField>
+    <MiqAeField name='date_acquired'> 2/13/14 11:29 AM </MiqAeField>
+    <MiqAeField name='reserve_token'>1000000000926  </MiqAeField>
+   </MiqAeInstance>
+   <MiqAeInstance name='10.11.11.101'>
+    <MiqAeField name='vlan'> VMNET_10.11.11.0/24 </MiqAeField>
+    <MiqAeField name='hostname'> test02 </MiqAeField>
+    <MiqAeField name='ipaddr'> 10.11.11.101 </MiqAeField>
+    <MiqAeField name='submask'> 255.255.255.0 </MiqAeField>
+    <MiqAeField name='gateway'> 10.11.11.65 </MiqAeField>
+    <MiqAeField name='inuse'> FALSE </MiqAeField>
+    <MiqAeField name='date_released'>  </MiqAeField>
+    <MiqAeField name='date_acquired'>  </MiqAeField>
+    <MiqAeField name='reserve_token'>  </MiqAeField>
+   </MiqAeInstance>
+   <MiqAeInstance name='10.11.11.102'>
+    <MiqAeField name='vlan'> VMNET_10.11.11.0/24 </MiqAeField>
+    <MiqAeField name='hostname'> test03 </MiqAeField>
+    <MiqAeField name='ipaddr'> 10.11.11.102 </MiqAeField>
+    <MiqAeField name='submask'> 255.255.255.0 </MiqAeField>
+    <MiqAeField name='gateway'> 10.11.11.65 </MiqAeField>
+    <MiqAeField name='inuse'> FALSE </MiqAeField>
+    <MiqAeField name='date_released'>  </MiqAeField>
+    <MiqAeField name='date_acquired'>  </MiqAeField>
+    <MiqAeField name='reserve_token'>  </MiqAeField>
+   </MiqAeInstance>
+   <MiqAeInstance name='10.11.11.103'>
+    <MiqAeField name='vlan'> VMNET_10.11.11.0/24 </MiqAeField>
+    <MiqAeField name='hostname'> test04 </MiqAeField>
+    <MiqAeField name='ipaddr'> 10.11.11.103 </MiqAeField>
+    <MiqAeField name='submask'> 255.255.255.0 </MiqAeField>
+    <MiqAeField name='gateway'> 10.11.11.65 </MiqAeField>
+    <MiqAeField name='inuse'> FALSE </MiqAeField>
+    <MiqAeField name='date_released'>  </MiqAeField>
+    <MiqAeField name='date_acquired'>  </MiqAeField>
+    <MiqAeField name='reserve_token'>  </MiqAeField>
+   </MiqAeInstance>
+  </MiqAeClass>
+</MiqAeDatastore>

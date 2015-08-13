@@ -1,0 +1,16 @@
+author: jd-calder
+collaborator: 
+date: 2015-05-17
+name: ManageIQ IPAM Extension
+slug: MIQ Internal IP Address Management system and associated command line scripts
+tags: automate, ipam,
+description:
+This is a solution for the ManageIQ internal IP Address Management (IPAM) system.  Several command line ruby scripts have
+been included.  This includes a script to convert a CSV file into a properly formated MIQ Automate zip file
+(include all needed YAML files).  Another script to convert MIQ Automate XML file into a CSV file for edit in a spreadsheet
+editor.  Another script converts a CSV file into a properly formated MIQ Automate XML file.
+TODO: Create script to converts an automate zip file into a CSV file.
+version: 1.0
+miq_ver: anand and cloudforms 3.x
+dependencies: none
+src_url: https://github.com/ManageIQ/manageiq_depot/tree/master/miq_ipam

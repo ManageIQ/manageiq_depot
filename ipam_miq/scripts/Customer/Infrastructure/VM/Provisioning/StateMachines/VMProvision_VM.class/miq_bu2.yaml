@@ -1,0 +1,20 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: miq_bu2
+    inherits: 
+    description: 
+  fields:
+  - CustomizeRequest:
+      value: /Customer/Infrastructure/VM/Provisioning/StateMachines/Methods/CustomizeRequest_miq_bu2
+  - AcquireIPAddress:
+      value: /Customer/Integration/MIQ_IPAM/IPAM_Methods/miq_acquire_ip_address
+  - Placement:
+      value: /Infrastructure/VM/Provisioning/Placement/cai_best_fit_with_defined_tags
+  - Provision:
+      value: /Infrastructure/VM/Provisioning/StateMachines/Methods/Provision
+  - CheckProvisioned:
+      value: /Infrastructure/VM/Provisioning/StateMachines/Methods/CheckProvisioned
