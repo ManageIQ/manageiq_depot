@@ -1,0 +1,14 @@
+author: evenit
+collaborator: 
+date: 2015-04-13
+name: Migrate to AWS
+slug: migrate_to_aws
+tags: build
+description: |
+    Migrate a virtual machine to Amazon Web Services (tested with Vmware)
+version: 0.1.0
+miq_ver: anand
+dependencies: 
+src_url: https://github.com/ManageIQ/manageiq_depot/migrate_to_aws
+license: GNU Public License 2
+

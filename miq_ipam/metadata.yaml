@@ -1,0 +1,14 @@
+author: jdcalder
+collaborator: jcornell, evenit
+date: 2015-04-07
+name: MIQ IPAM
+slug: miq_ipam
+tags: build
+description: |
+    Extend ManageIQ to provide a built-in IP Address Management (IPAM) solution
+version: 0.1.0
+miq_ver: anand
+dependencies: 
+src_url: https://github.com/ManageIQ/manageiq_depot/miq_ipam
+license: To Be Defined
+

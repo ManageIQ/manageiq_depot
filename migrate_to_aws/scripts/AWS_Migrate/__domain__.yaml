@@ -1,0 +1,12 @@
+---
+object_type: domain
+version: 1.0
+object:
+  attributes:
+    name: AWS_Migrate
+    description:
+    display_name:
+    system: false
+    priority: 
+    enabled: true
+
