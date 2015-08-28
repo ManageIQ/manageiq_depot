@@ -1,0 +1,11 @@
+---
+object_type: domain
+version: 1.0
+object:
+  attributes:
+    name: Configuration
+    description: 
+    display_name: 
+    system: false
+    priority: 3
+    enabled: true
