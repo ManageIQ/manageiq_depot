@@ -1,0 +1,263 @@
+diff -urw phpipam.orig/api/controllers/Addresses.php phpipam/api/controllers/Addresses.php
+--- phpipam.orig/api/controllers/Addresses.php	2014-12-05 09:04:26.000000000 +0100
++++ phpipam/api/controllers/Addresses.php	2015-08-16 01:50:47.130017524 +0200
+@@ -46,6 +46,24 @@
+ 
+ 
+ 	/** 
++	*
++	*
++	*/
++	public function nextFreeAddresses()
++	{
++		# init section class
++		$address = new Address ();
++		# set subnetId and dnsName
++		if($this->_params['subnetId'])		{ $address->subnetId = $this->_params['subnetId']; }
++		if($this->_params['dnsName'])		{ $address->dnsName  = $this->_params['dnsName']; }
++
++		# fetch results
++		$res = $address->nextFreeAddress();
++		# return result
++		return $res;
++	}
++
++	/** 
+ 	* delete addresses 
+ 	*/
+ 	public function deleteAddresses()
+@@ -53,10 +71,15 @@
+ 		# init section class
+ 		$address = new Address ();
+ 		# set Id
+-		if($this->_params['id']) 		{ $address->id = $this->_params['id']; }
+-		
+-		# fetch results
++		if ($this->_params['id']) {
++			$address->id = $this->_params['id'];
++		} elseif ($this->_params['ip_addr']) {
++			$address->ip_addr = transform2decimal($this->_params['ip_addr']);
++		} else {
++			throw new Exception("Neither Id nor IP Address provided !");
++		}
+ 		$res = $address->deleteAddress(); 
++		
+ 		# return result
+ 		return $res;
+ 	}
+diff -urw phpipam.orig/api/controllers/Subnets.php phpipam/api/controllers/Subnets.php
+--- phpipam.orig/api/controllers/Subnets.php	2014-12-05 09:38:30.000000000 +0100
++++ phpipam/api/controllers/Subnets.php	2015-08-16 22:01:16.056446285 +0200
+@@ -50,11 +50,15 @@
+ 		$subnet->format = $this->_params['format'];
+ 		
+ 		//get all subnets
+-		if($this->_params['all'])			{ $subnet->all = true; }
+-		//get all subnets in subnet
+-		elseif($this->_params['sectionId']) { $subnet->sectionId = $this->_params['sectionId']; }
+-		//get subnet by ID
+-		else 								{ $subnet->id = $this->_params['id'];	}
++		if ($this->_params['all']) {
++			$subnet->all = true;
++		} elseif ($this->_params['sectionId']) {
++			$subnet->sectionId = $this->_params['sectionId'];
++		} elseif ($this->_params['desc']) {
++			$subnet->desc = $this->_params['desc'];
++		} else {
++			$subnet->id = $this->_params['id'];
++		}
+ 		
+ 		//fetch results
+ 		$res = $subnet->readSubnet(); 
+diff -urw phpipam.orig/api/index.php phpipam/api/index.php
+--- phpipam.orig/api/index.php	2014-12-05 10:57:41.000000000 +0100
++++ phpipam/api/index.php	2015-08-16 00:16:47.010547596 +0200
+@@ -57,6 +57,7 @@
+ 	}
+ 
+ 
++
+ 	/* Get request ---------- */
+ 
+ 	//decrypt the request
+@@ -70,7 +71,6 @@
+ 	//transorm it into an array
+ 	$params = (array) $params;
+ 
+-
+ 	/* Initialize controllers ---------- */
+ 
+ 	//verify permissions	
+diff -urw phpipam.orig/api/models/address.php phpipam/api/models/address.php
+--- phpipam.orig/api/models/address.php	2014-12-05 09:20:58.000000000 +0100
++++ phpipam/api/models/address.php	2015-08-16 01:55:59.388757963 +0200
+@@ -36,8 +36,11 @@
+ 	 */
+ 	private function fetchArray() 
+ 	{
+-		try { $this->result = $this->Database->getArray( $this->query ); }
+-	    catch (Exception $e) 											{ throw new Exception($e->getMessage()); }
++		try {
++			$this->result = $this->Database->getArray( $this->query );
++		} catch (Exception $e) {
++			throw new Exception($e->getMessage());
++		}
+ 	}
+ 
+ 
+@@ -46,8 +49,11 @@
+ 	 */
+ 	private function executeQuery() 
+ 	{
+-		try { $this->result = $this->Database->executeQuery( $this->query ); }
+-	    catch (Exception $e) 													{ throw new Exception($e->getMessage()); }
++		try {
++			$this->result = $this->Database->executeQuery( $this->query );
++		} catch (Exception $e) {
++			throw new Exception($e->getMessage());
++		}
+ 	}
+ 
+ 
+@@ -56,6 +62,7 @@
+ 	 */
+ 	public function readAddress()
+ 	{
++
+ 		/* check input */
+ 		$this->Common->check_input;
+ 		
+@@ -88,24 +95,64 @@
+ 	
+ 
+ 	/**
++	 *	get next free IP address
++	 *		subnetId must be provided
++	 */
++	public function nextFreeAddress ()
++	{
++		/* check input */
++		$this->Common->check_var ("int", $this->subnetId, null);
++		//$this->Common->check_var ("string", $this->dnsName, null);
++
++		$firstAvailableIPAddress = getFirstAvailableIPAddress($this->subnetId);
++
++	        // set query and execute
++	        $this->query  = "insert into `ipaddresses` ";
++        	$this->query .= "(`subnetId`,`ip_addr`,`description`,`dns_name`,`mac`,`owner`,`state`,`switch`,`port`,`note`,`excludePing`) ";
++	        $this->query .= "values ";
++        	$this->query .= "('". $this->subnetId ."','". $firstAvailableIPAddress ."','". $this->description ."','". $this->dnsName ."','";
++                $this->query .= $this->mac ."','". $this->owner ."','". $this->state ."','". $this->switch ."','". $this->port ."','". $this->note ."','";
++		$this->query .= $this->excludePing ."');";
++		$this->executeQuery();
++
++                // set result
++                $result['ip_addr'] = transform2long($firstAvailableIPAddress);
++		return $result;
++	}
++
++
++	/**
+ 	 *	delete Address 
+ 	 *		id must be provided
+ 	 */	
+ 	public function deleteAddress ()
+ 	{
++
++		if ($this->ip_addr) {
++			$this->query  = "select `id` from `ipaddresses` where `ip_addr` = '". $this->ip_addr ."';";
++			$this->fetchArray();
++                        if (sizeof($this->result) == 0) {
++				throw new Exception("IP address ". $this->ip_addr ." is not registered.");
++			}
++			$this->id = (int)$this->result[0]['id'];
++		}
++
+ 		//check input
+ 		$this->Common->check_var ("int", $this->id, null);
+ 		
+ 		//verify that it exists
+-		try { $this->readAddress(); }
+-		catch (Exception $e) 											{ throw new Exception($e->getMessage()); }
++		try {
++			$this->readAddress();
++		} catch (Exception $e) {
++			throw new Exception($e->getMessage());
++		}
+ 
+ 		//set query and execute
+ 		$this->query = "delete from `ipaddresses` where `id` = ".$this->id.";";
+ 		$this->executeQuery();
+ 		
+ 		//set result
+-		$result['result']   = "success";
++		//$result['result']   = "success";
+ 		$result['response'] = "Address ".$this->id." deleted successfully!";
+ 
+ 		//return result
+diff -urw phpipam.orig/api/models/subnet.php phpipam/api/models/subnet.php
+--- phpipam.orig/api/models/subnet.php	2014-12-05 10:10:45.000000000 +0100
++++ phpipam/api/models/subnet.php	2015-08-16 21:54:55.734861859 +0200
+@@ -59,29 +59,36 @@
+ 		/* check input */
+ 		$this->Common->check_input;
+ 		
+-		/* all subnets */
+ 		if($this->all) {
+-			//set query
+ 			$this->query = "select * from `subnets`;";
+ 			$this->fetchArray();
+-			if(sizeof($this->result)==0) 										{ throw new Exception('No subnets available'); }
++			if(sizeof($this->result)==0) {
++				throw new Exception('No subnets available');
++			}
+ 		}
+-		/* subnet by id */
+ 		elseif($this->id) {
+-			//set query
+ 			$this->query = "select * from `subnets` where `id` = ".$this->id.";";
+ 			$this->fetchArray();
+-			if(sizeof($this->result)==0) 										{ throw new Exception('Invalid subnet Id '.$this->id); }
++			if(sizeof($this->result)==0) {
++				throw new Exception('Invalid subnet Id '.$this->id);
++			}
+ 		}
+-		/* all subnets in section */
+ 		elseif($this->sectionId) {
+-			//set query
+ 			$this->query = "select * from `subnets` where `sectionId` = ".$this->sectionId.";";
+ 			$this->fetchArray();
+-			if(sizeof($this->result)==0) 										{ throw new Exception('Invalid section Id or no subnets '.$this->sectionId); }
++			if(sizeof($this->result)==0) {
++				throw new Exception('Invalid section Id or no subnets '.$this->sectionId);
++			}
++		}
++		elseif ($this->desc) {
++			$this->query = "select * from `subnets` where `description` = '".$this->desc."';";
++			$this->fetchArray();
++			if (sizeof($this->result) == 0) {
++				throw new Exception("No subnet with description '".$this->desc."'.");
++			}
++		} else {
++			throw new Exception('Selector missing');
+ 		}
+-		/* method missing */
+-		else 																	{ throw new Exception('Selector missing'); }
+ 	
+ 		//convert object to array
+ 		$result = $this->Common->toArray($this->result);
+diff -urw phpipam.orig/functions/functions-common.php phpipam/functions/functions-common.php
+--- phpipam.orig/functions/functions-common.php	2014-12-11 15:22:53.000000000 +0100
++++ phpipam/functions/functions-common.php	2015-08-16 01:27:50.329885239 +0200
+@@ -87,7 +87,10 @@
+ 	    	# permit for search
+ 	    	if($get['section']!="search") {
+ 		    header("Location:".create_link("error","406"));
+-	}	}	}	}
++				}
++			}
++		}
++	}
+ }
+ 
+ 

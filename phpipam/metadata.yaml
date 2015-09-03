@@ -1,0 +1,10 @@
+---
+author: fdupont
+date: 2015-08-29
+name: PHPIPAM
+slug: phpipam
+tags: automate, ipam
+description: Integration with PHPIPAM to acquire/release IP addresses
+miq_ver: botvinik
+dependencies: ruby 2.x, ruby-mcrypt, yum, yum-epel, httpclient, json
+src_url: https://github.com/ManageIQ/manageiq_depot/tree/master/phpipam
