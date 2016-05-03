@@ -1,6 +1,10 @@
 ManageIQ Community Depot
 =========================
 
+**Note that this version of the ManageIQ Depot is being deprecated. Please browse and upload extensions with the new ManageIQ Depot at [https://depot.manageiq.org/](https://depot.manageiq.org/)**
+
+---
+
 Let's get ready for the ManageIQ Community Depot. Got a policy you want to share? State machine? A script that utilizes the REST API and object model? Put it in the community depot! The community depot (or just "the depot") is where the ManageIQ community shares and collaborates on ManageIQ software projects and extensions. 
 
 This is the format of individual extensions in the repo:
