@@ -1,0 +1,12 @@
+author: Manel
+collaborator:   
+date: 2015-10-05
+name: Nuage Networks Integratopm
+slug: nuage_networks_integration
+tags: nuage, network
+description: This method assigns a Floating IP to an OpenStack VM working with Nuage Networks. We will continue working to make it a complete integration between CloudForms and Nuage.
+version: 0.1
+miq_ver: anand and cloudforms 3.x
+dependencies: none
+src_url: https://github.com/manelcaruma/manageiq_depot
+license: GPLv3 (https://www.gnu.org/licenses/gpl-3.0.html)
